@@ -75,11 +75,8 @@ WSGI_APPLICATION = 'FridgeFriend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'FridgeFriend',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'Unordinary124',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
