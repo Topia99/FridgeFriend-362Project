@@ -1,8 +1,7 @@
 from django.http import HttpResponse
-import datetime
+from django.template import loader
 
 # Create your views here.
 def index(request):
-    current_time = datetime.datetime.now();
-    html = "<html><body><h1>Fridge Friend</h1><p>Current time: %s</p></body></html>" % current_time
-    return HttpResponse(html)
+    template = loader.get_template('main.html')
+    return HttpResponse(template.render())
