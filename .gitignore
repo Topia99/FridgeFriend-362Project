@@ -1,2 +1,4 @@
 venv/
 FridgeFriend/FridgeFriend/settings.py
+FridgeFriend/FridgeFriendApp/__pycache__/
+FridgeFriend/FridgeFriend/__pycache__/
