@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'FridgeFriend',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'Unordinary124',
+        'PASSWORD': 'oRk56Sfu',
     }
 }
 
