@@ -2,15 +2,27 @@
 <html>
 <style>
     table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
+        border:1px solid black;
+    }
 </style>
+
 <head>
     <title>Fridge Friend - {%block title %}{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+    
+    <div class="container">
+        <ul class="nav bg-info">
+          <li class="nav-item">
+            <a class="nav-link link-light" href="/">HOME</a>
+          </li>
+        </ul>
+      
+        {% block content %}
+        {% endblock %}
+      </div>
 </body>
 </html>
