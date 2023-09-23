@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class FridgefriendappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'FridgeFriend'
+    name = 'FridgeFriendApp'
