@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <html>
-<style>
-    table, th, td {
-        border:1px solid black;
-    }
-</style>
-
 <head>
     <title>Fridge Friend - {%block title %}{% endblock %}</title>
     {% load bootstrap5 %}
@@ -13,16 +7,14 @@
     {% bootstrap_javascript %}
 </head>
 <body>
-    
     <div class="container">
-        <ul class="nav bg-success">
-          <li class="nav-item">
-            <a class="nav-link link-light" href="/">HOME</a>
-          </li>
+        <ul class="nav bg-info">
+            <li class="nav-item">
+                <a class="nav-link link-light" href="/">HOME</a>
+            </li>
         </ul>
-      
-        {% block content %}
-        {% endblock %}
-      </div>
+    </div>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
