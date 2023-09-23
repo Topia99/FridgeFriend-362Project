@@ -5,20 +5,22 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Your Fridge</h1>
+<img src="https://img1.wsimg.com/isteam/ip/b8071a90-0a3d-4caf-8d6e-a1c207f7059f/Screenshot%202022-10-30%20at%205.03.32%20pm.png" alt="FridgeFriendLogo.png" width="180" height="180">
+    <h1 style="color:green;">Your Fridge</h1>
 
     <ul>
 
         <table style="width:100%">
             <tr>
-              <td>Items</td>
+              <td>Items Name</td>
               <td>Expiration Date</td>
               <td>Time Left</td>
             </tr>
-
-            <tr>
-            </tr>
-
+            
+              {% for Item in item_list %}
+                <tr> <td> {{Item.item_name}} {{Item.expiry_date}} </td> </tr>
+              {% endfor %}
+            
           </table>
 
         <button>Add</button>
