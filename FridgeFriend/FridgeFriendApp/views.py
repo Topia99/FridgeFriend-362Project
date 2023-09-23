@@ -11,3 +11,10 @@ def index(request):
         "item_list":item_list
     }
     return HttpResponse(template.render(context))
+
+def food_entry(request):
+    if request.method == 'POST':
+        food_name = request.POST.get("food_name")
+        quantity = request.POST.get("quantity")
+        
+        
