@@ -16,10 +16,11 @@
               <td>Expiration Date</td>
               <td>Time Left</td>
             </tr>
-
-            <tr>
-            </tr>
-
+            
+              {% for Item in item_list %}
+                <tr> <td> {{Item.item_name}} {{Item.expiry_date}} </td> </tr>
+              {% endfor %}
+            
           </table>
 
         <button>Add</button>
