@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
 <img src="https://img1.wsimg.com/isteam/ip/b8071a90-0a3d-4caf-8d6e-a1c207f7059f/Screenshot%202022-10-30%20at%205.03.32%20pm.png" class="rounded" alt="FridgeFriendLogo.png" width="180" height="180" style="margin-top: 5px;">
     <h1 style="color:green;">Your Fridge</h1>
 
@@ -28,9 +29,36 @@
 
         <!-- Pull each item from db here with dj-html to start-->
     </ul>
+    <div>
+          Items: <input type= "text" name = "items" id="item">
+          Expiration Date: <input type= "date" name = "expdate" id="expdate">
+        </div>
     <div class="main-buttons">
-      <button class="btn btn-dark">Add</button>
-      <button class="btn btn-dark">Delete</button>
+      <button class="btn btn-dark" id="addRow" onclick = "addRow()">Add</button>
+      <button class="btn btn-dark" id="delRow" onclick="deleteRow()">Delete</button>
       <button class="btn btn-dark">Save</button>
     </div>
+
+     <script>
+
+      function addRow() {
+        let table = document.getElementById("Items_Table");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        let c2 = row.insertCell(1);
+        let c3 = row.insertCell(2);
+        items = document.getElementById("item").value
+        expdate = document.getElementById("expdate").value
+        c1.innerHTML = items
+        c2.innerHTML = expdate
+      }
+      
+    
+      function deleteRow(r) 
+      {
+        let table = document.getElementById("Items_Table");
+
+      
+      }
+    </script>
 {% endblock %}

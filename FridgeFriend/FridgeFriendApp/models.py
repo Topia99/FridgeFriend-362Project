@@ -16,7 +16,7 @@ class Fridge(models.Model):
 class UserFridge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE)
-
+    
 class Category(models.Model):
     DAIRY = 'D'
     FRUIT = 'F'
@@ -27,6 +27,7 @@ class Category(models.Model):
     COOKED_FOOD = 'CF'
     MANUFACTURE_PRODUCT = 'MP'
     OTHERS = 'O'
+
 
     CATEGORY_CHOICES = [
        (DAIRY, 'Dairy'),

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'FridgeFriendApp',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'FridgeFriend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['FridgeFriendApp/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +81,7 @@ DATABASES = {
         'NAME': 'FridgeFriend',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'Unordinary124',
+        'PASSWORD': 'oRk56Sfu',
     }
 }
 
