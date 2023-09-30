@@ -1,0 +1,13 @@
+body {
+    background-color: antiquewhite !important;
+}
+
+.main-table {
+    padding-left: 0px;
+}
+
+.main-table table {
+    padding-bottom: 2rem;
+    border-color: transparent;
+    --bs-table-hover-color: #198754;
+}
