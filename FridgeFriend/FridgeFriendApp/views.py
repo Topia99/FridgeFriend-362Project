@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import User, Item
 
+from .models import User, Item
+
 # Create your views here.
 def index(request):
     template = loader.get_template('main.html')

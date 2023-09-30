@@ -6,7 +6,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
     create_at = models.DateTimeField(auto_now_add=True)
-    
+
 class Fridge(models.Model):
     fridge_name = models.CharField(max_length=255)
     create_at = models.DateTimeField(auto_now_add=True)
@@ -27,7 +27,8 @@ class Category(models.Model):
     COOKED_FOOD = 'CF'
     MANUFACTURE_PRODUCT = 'MP'
     OTHERS = 'O'
-    
+
+
     CATEGORY_CHOICES = [
        (DAIRY, 'Dairy'),
        (FRUIT, 'Fruit'),
@@ -39,10 +40,10 @@ class Category(models.Model):
        (MANUFACTURE_PRODUCT, 'Manufacture Profuct'),
        (OTHERS, 'Others'),
     ]
-    
+
     category_name = models.CharField(max_length=26, choices=CATEGORY_CHOICES, default='Others')
     days_last = models.SmallIntegerField()
-    
+
 class Item(models.Model):
     item_name = models.CharField(max_length=255)
     quantity = models.PositiveSmallIntegerField()
@@ -54,6 +55,3 @@ class ItemStatus(models.Model):
     item = models.OneToOneField(Item, on_delete=models.CASCADE)
     freeze = models.BooleanField()
     create_at = models.DateTimeField(auto_now_add=True)
-    
-    
-    
