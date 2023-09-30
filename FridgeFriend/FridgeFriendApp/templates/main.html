@@ -10,22 +10,64 @@
 
     <ul>
 
-        <table style="width:100%">
+        <table id="Items_Table" style="width:100%">
             <tr>
               <td>Items Name</td>
               <td>Expiration Date</td>
               <td>Time Left</td>
             </tr>
-
-            <tr>
-            </tr>
-
+            
+              {% for Item in item_list %}
+                <tr> 
+                  <td> {{Item.item_name}}</td> 
+                  <td>{{Item.expiry_date}} </td> 
+                  <td></td>
+                </tr>
+              {% endfor %}
+            
           </table>
+        
+        <div>
+          Items: <input type= "text" name = "items" id="item">
+          Expiration Date: <input type= "date" name = "expdate" id="expdate">
+        </div>
+        <button id="addRow" onclick = "addRow()">Add</button>
 
-        <button>Add</button>
-        <button>Delete</button>
+
+        <button id="delRow" onclick = "deleteRow()">Delete</button>
+
+
         <button>Save</button>
 
         <!-- Pull each item from db here with dj-html to start-->
     </ul>
+
+
+    <script>
+
+      function addRow() {
+        let table = document.getElementById("Items_Table");
+        let row = table.insertRow(-1);
+        let c1 = row.insertCell(0);
+        let c2 = row.insertCell(1);
+        let c3 = row.insertCell(2);
+        items = document.getElementById("item").value
+        expdate = document.getElementById("expdate").value
+        c1.innerHTML = items
+        c2.innerHTML = expdate
+      }
+      
+    
+      function deleteRow(r) 
+      {
+        let table = document.getElementById("Items_Table");
+
+      
+      }
+    </script>
+
+
 {% endblock %}
+
+
+  
