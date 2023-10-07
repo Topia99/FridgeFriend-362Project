@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'FridgeFriendApp',
     'bootstrap5',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'NAME': 'FridgeFriend',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'oRk56Sfu',
+        'PASSWORD': 'Unordinary124',
     }
 }
 
@@ -126,3 +127,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'core.User'
