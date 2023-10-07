@@ -10,4 +10,6 @@ body {
     padding-bottom: 2rem;
     border-color: transparent;
     --bs-table-hover-color: #198754;
+    tr{transition:all .25s ease-in-out}
+    tr:hover{background-color: #eee; cursor:pointer;}
 }
