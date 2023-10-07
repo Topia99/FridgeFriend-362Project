@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 django = "*"
 mysqlclient = "*"
-django-bootstrap-v5 = "*"
 
 [dev-packages]
 
