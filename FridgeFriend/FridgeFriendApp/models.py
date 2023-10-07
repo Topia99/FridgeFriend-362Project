@@ -1,10 +1,11 @@
 from django.db import models
-from django.conf import settings
 
 class User(models.Model):
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
     create_at = models.DateTimeField(auto_now_add=True)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 class Fridge(models.Model):
     fridge_name = models.CharField(max_length=255)
