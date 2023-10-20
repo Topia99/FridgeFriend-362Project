@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<img src="https://img1.wsimg.com/isteam/ip/b8071a90-0a3d-4caf-8d6e-a1c207f7059f/Screenshot%202022-10-30%20at%205.03.32%20pm.png" class="rounded" alt="FridgeFriendLogo.png" width="180" height="180" style="margin-top: 5px;">
+<img src="/static/ff.png" class="rounded" alt="FridgeFriendLogo.png" width="180" height="180" style="margin-top: 5px;">
     <h1 style="color:green;">Your Fridge</h1>
 
     <ul class="main-table">
@@ -22,7 +22,9 @@
             <tbody>
               {% for Item in item_list %}
                 <tr> <td> {{Item.item_name}} </td> <td> {{Item.expiry_date}} </td>
-                <td> Placeholder date </td> </tr>
+                <td> Placeholder date </td> 
+                <td> <a href="deleterecord/{{Item.id}}"><img src="/static/delete.png" width="25" height="25"></a>   |   <img src="/static/edit.png" onclick="" width="25" height="25"> </td>
+                </tr>
               {% endfor %}
             </tbody>
           </table>
@@ -30,12 +32,23 @@
         <!-- Pull each item from db here with dj-html to start-->
     </ul>
     <div>
-          Items: <input type= "text" name = "items" id="item">
-          Expiration Date: <input type= "date" name = "expdate" id="expdate">
+        <form action="addrecord/" method="post">
+          {% csrf_token %}
+          Item:
+          <input name="item">
+          Expiration Date:
+          <input type="date" name="expdate">
+          <br><br>
+          <div class="main-buttons">
+            <input class="btn btn-dark"type="submit" value="Add">
+          </div>
+        </form>
+          <!-- Items: <input type= "text" name = "items" id="item">
+          Expiration Date: <input type= "date" name = "expdate" id="expdate"> -->
         </div>
-    <div class="main-buttons">
+    {% comment %} <div class="main-buttons">
       <button class="btn btn-dark" id="addRow" onclick = "addRow()">Add</button>
       <button class="btn btn-dark" id="delRow" onclick="deleteRow()">Delete</button>
       <button class="btn btn-dark">Save</button>
-    </div>
+    </div> {% endcomment %}
 {% endblock %}
