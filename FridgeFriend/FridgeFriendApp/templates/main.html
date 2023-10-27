@@ -20,19 +20,21 @@
               </tr>
             </thead>
             <tbody>
-              {% for Item in item_list %}
-                <tr> <td> {{Item.item_name}} </td> <td> {{Item.expiry_date}} </td>
-                <td> Placeholder date </td> 
-                <td> <a href="deleterecord/{{Item.id}}"><img src="/static/delete.png" width="25" height="25"></a>   |   <img src="/static/edit.png" onclick="" width="25" height="25"> </td>
-                </tr>
-              {% endfor %}
-            </tbody>
+              {% for item in items %}
+                  <tr> 
+                      <td> {{ item.item_name }} </td> 
+                      <td> {{ item.expiry_date }} </td>
+                      <td> Placeholder date </td> 
+                      <td> <a href="deleterecord/{{ item.id }}"><img src="/static/delete.png" width="25" height="25"></a>   |   <img src="/static/edit.png" onclick="" width="25" height="25"> </td>
+                  </tr>
+              {% endfor %} 
+          </tbody>
           </table>
 
         <!-- Pull each item from db here with dj-html to start-->
     </ul>
     <div>
-        <form action="addrecord/" method="post">
+        <form action="/" method="post">
           {% csrf_token %}
           Item:
           <input name="item">
