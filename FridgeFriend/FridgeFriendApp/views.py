@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Item, Fridge, Category
+import datetime
+
 
 # Create your views here.
 def index(request):
@@ -44,3 +46,6 @@ def updaterecord(request, id):
     item_.expiry_date = exp_date
     item_.save()
     return HttpResponseRedirect(reverse('index'))
+
+
+    

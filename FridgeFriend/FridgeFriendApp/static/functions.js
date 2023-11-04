@@ -11,9 +11,12 @@ function addRow() {
   }
   
 
-  function deleteRow(r) 
-  {
-    let table = document.getElementById("Items_Table");
-
-  
-  }
+function return_Date(item){
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = mm + '/' + dd + '/' + yyyy;
+  time_left = today - item
+  document.getElementById("date").innerHTML = time_left;
+}
