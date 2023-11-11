@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html>
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
@@ -7,6 +8,12 @@
 <style>
     table, th, td {
         border:1px solid black;
+    }
+
+    .hello-msg{
+      font-size: 18px;
+      color: #fff;
+      margin-right: 20px;
     }
 </style>
 
@@ -22,6 +29,10 @@
         <ul class="nav bg-success">
           <li class="nav-item">
             <a class="nav-link link-light" href="/">HOME</a>
+          </li>
+          <li class="nav-item">
+            <span class="hello-msg">Hello, {{request.user}}</span>
+            <span ><a class-"hello-msg" href="{% url 'logout' %}">Logout</a></span>
           </li>
         </ul>
       
