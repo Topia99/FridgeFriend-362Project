@@ -1,30 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.decorators import action
-from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
-from rest_framework.response import Response
-from .serializers import ItemSerializer
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .models import User, Item, Fridge, Category
-from django.shortcuts import render
 import requests
+from .forms import CreateUserForm
 
 
 # Create your views here.
+@login_required(login_url='login')
 def index(request):
     template = loader.get_template('main.html')
     item_list = Item.objects.all()
     context = {
-        "items":item_list
+        "items": item_list
     }
     return HttpResponse(template.render(context))
 
-def signin(request):
-    return render(request, 'signin.html')
-
+#@login_required(login_url='login')
 @csrf_exempt #let's revist this after the login page is made
 def addrecord(request):
     name = request.POST['item']
@@ -37,11 +35,13 @@ def addrecord(request):
     item.save()
     return HttpResponseRedirect(reverse('index'))
 
+@login_required(login_url='login')
 def deleterecord(request, id):
     item_  = Item.objects.get(id=id)
     item_.delete()
     return HttpResponseRedirect(reverse('index'))
 
+@login_required(login_url='login')
 @csrf_exempt
 def updaterecord(request, id):
     item_ = Item.objects.get(id=id)
@@ -53,29 +53,46 @@ def updaterecord(request, id):
     item_.save()
     return HttpResponseRedirect(reverse('index'))
 
-# from rest_framework.renderers import TemplateHTMLRenderer
-
-# def index(request):
-#     users = User.objects.all()
-#     serializer = ItemSerializer(users, many=True)
-#     context = {'users': serializer.data}
-#     return render(request, 'index.html', context=context, renderer=TemplateHTMLRenderer())
-
-# class ItemViewSet(ModelViewSet):
-#     queryset = Item.objects.all()
-#     serializer_class = ItemSerializer
-    
-#     # template_name = 'main.html'
-#     renderer_classes = (JSONRenderer, TemplateHTMLRenderer)
-    
-
-
-#     def list(self, request, *args, **kwargs):
-#         response = super(ItemViewSet, self).list(request, *args, **kwargs)
-#         if request.accepted_renderer.format == 'html':
-#             return Response({'items': response.data}, template_name='main.html')
-#         return response
-    
-    # def create(self, request, *args, **kwargs):
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        form = CreateUserForm()
         
-    #     return super().create(request, *args, **kwargs)
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user)
+                return redirect('login')
+    
+    context = {'form': form}
+    return render(request, 'register.html', context)
+    
+    
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        if request.method == 'POST':
+            
+            # Get user input from login.html
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            
+            # autheticate user
+            user = authenticate(request, username=username, password=password)
+            
+            # Check whether user exist
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+    context = {}
+    return render(request, 'login.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
