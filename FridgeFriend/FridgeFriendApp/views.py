@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import User, Item, Fridge, Category
-import requests
 from .forms import CreateUserForm
 
 
@@ -18,7 +17,8 @@ def index(request):
     template = loader.get_template('main.html')
     item_list = Item.objects.all()
     context = {
-        "items": item_list
+        "items": item_list,
+        "request": request,
     }
     return HttpResponse(template.render(context))
 
@@ -96,3 +96,7 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+def userProfile(request):
+    return render(request, 'profile.html')
