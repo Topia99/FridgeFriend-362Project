@@ -99,4 +99,19 @@ def logoutUser(request):
 
 
 def userProfile(request):
+    # Display user's fridge
+    template = loader.get_template('profile.html')
+    item_list = Fridge.objects.filter()
+    context = {
+        "items": item_list,
+        "request": request,
+    }
+    return HttpResponse(template.render(context))
+    
+    
     return render(request, 'profile.html')
+    
+
+def addFridge(request):
+    # Add new Fridge
+    pass
