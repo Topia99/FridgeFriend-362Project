@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html>
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
   <script src="{% static 'functions.js' %}"></script>
-<style>
+  <style>
     table, th, td {
         border:1px solid black;
     }
-</style>
 
+    .hello-msg{
+      font-size: 18px;
+      color: #fff;
+      margin-right: 20px;
+    }
+
+    /* Adjusting navbar styles */
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .nav-item {
+        align-self: center;
+    }
+  </style>
 <head>
     <title>Fridge Friend - {%block title %}{% endblock %}</title>
     {% load bootstrap5 %}
@@ -20,9 +37,20 @@
     
     <div class="container">
         <ul class="nav bg-success">
+
+           <!-- Home link -->
           <li class="nav-item">
             <a class="nav-link link-light" href="/">HOME</a>
           </li>
+         
+
+           <!-- Right-aligned user info -->
+           <li class="nav-item">
+            <span class="hello-msg">Hello,
+              <a class="hello-msg link-light" href="{% url 'logout' %}">{{ request.user.username }}</a>
+            </span>
+            <a class="hello-msg link-light" href="{% url 'logout' %}">Logout</a>
+          </li> 
         </ul>
       
         {% block content %}

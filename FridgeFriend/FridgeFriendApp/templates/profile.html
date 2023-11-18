@@ -1,0 +1,14 @@
+{% extends "navbar.html" %}
+
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+
+<img src="/static/ff.png" class="rounded" alt="FridgeFriendLogo.png" width="180" height="180" style="margin-top: 5px;">
+    <h1 style="color:green;">{{request.user.username}}'s Fridge</h1>
+
+    
+{% endblock %}
