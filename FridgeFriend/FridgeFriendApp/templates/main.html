@@ -28,10 +28,10 @@
                       let data{{Item.id}} = document.currentScript.dataset;
                       let date{{Item.id}} = data{{Item.id}}.date;
                   </script>
-                <td> <button id="daysleft{{Item.id}}" onclick= "return_Date(date{{Item.id}})">Date</button></td>
+                <td> <button id="daysleft{{Item.id}}" onclick= "return_Date(date{{Item.id}}, {{Item.id}})"><img src="/static/eye.png" width="25" height="25"></button></td>
 
                 <script>
-                  function return_Date(item){
+                  function return_Date(item, id){
 
                   var countDownDate = new Date(item).getTime();
                   
@@ -50,13 +50,13 @@
                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                   
-                  
-                    document.getElementById("daysleft{{Item.id}}").innerHTML = days + "d " + hours + "h "
+                    buttonID = "daysleft" + id
+                    document.getElementById(buttonID).innerHTML = days + "d " + hours + "h "
                     + minutes + "m " + seconds + "s ";
                   
                     if (distance < 0) {
                       clearInterval(x);
-                      document.getElementById("daysleft{{Item.id}}").innerHTML = "EXPIRED";
+                      document.getElementById(buttonID).innerHTML = "EXPIRED";
                     }
                   }, 1000);
                   }
