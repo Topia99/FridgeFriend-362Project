@@ -56,7 +56,7 @@
                     console.log("daysleft" + id);
                     if (distance < 0) {
                       clearInterval(x);
-                      document.getElementById("daysleft{{Item.id}}").innerHTML = "EXPIRED";
+                      document.getElementById(buttonId).innerHTML = "EXPIRED";
                     }
                   }, 1000);
                   }
