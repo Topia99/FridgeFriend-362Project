@@ -23,4 +23,5 @@ urlpatterns = [
     path("deleterecord/<int:id>", views.deleterecord, name="deleterecord"),
     path("updaterecord/<int:id", views.updaterecord, name="updaterecord"),
     path("profile/", views.userProfile, name='profile'),
+    #path("addfridge/", views.addfridge, name='addfridge'),
 ]
