@@ -11,6 +11,7 @@ from .models import User, Item, Fridge, Category
 from .forms import CreateUserForm
 
 
+
 # Create your views here.
 @login_required(login_url='login')
 def index(request):
@@ -52,6 +53,7 @@ def updaterecord(request, id):
     item_.expiry_date = exp_date
     item_.save()
     return HttpResponseRedirect(reverse('index'))
+
 
 def registerPage(request):
     if request.user.is_authenticated:
@@ -100,3 +102,4 @@ def logoutUser(request):
 
 def userProfile(request):
     return render(request, 'profile.html')
+
