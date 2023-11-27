@@ -15,12 +15,13 @@ from . import views
 
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("fridge/<str:pk>", views.index, name="fridge"),
     path("login/", views.loginPage, name='login'),
     path("logout/", views.logoutUser, name='logout'),
     path("register/", views.registerPage, name='register'),
-    path("addrecord/", views.addrecord, name="addrecord"),
+    path("fridge/<str:pk>/addrecord/", views.addrecord, name="addrecord"),
     path("deleterecord/<int:id>", views.deleterecord, name="deleterecord"),
-    path("updaterecord/<int:id", views.updaterecord, name="updaterecord"),
-    path("profile/", views.userProfile, name='profile'),
+    path("updaterecord/<int:id>", views.updaterecord, name="updaterecord"),
+    path("create_fridge/", views.createFridge, name="createFridge"),
+    path("", views.userProfile, name='user'),
 ]

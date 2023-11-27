@@ -7,16 +7,16 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import User, Item, Fridge, Category
-from .forms import CreateUserForm
+from .models import Item, Fridge, Category
+from .forms import CreateUserForm, FridgeForm
 
 
 
 # Create your views here.
 @login_required(login_url='login')
-def index(request):
+def index(request, pk):
     template = loader.get_template('main.html')
-    item_list = Item.objects.all()
+    item_list = Item.objects.filter(fridge=pk).all()
     context = {
         "items": item_list,
         "request": request,
@@ -25,16 +25,16 @@ def index(request):
 
 #@login_required(login_url='login')
 @csrf_exempt #let's revist this after the login page is made
-def addrecord(request):
+def addrecord(request, pk):
     name = request.POST['item']
     exp_date = request.POST['expdate']
     current_fridge = Fridge.objects.first()
     category_choice = Category.objects
 
     item = Item(item_name=name, expiry_date=exp_date,
-                quantity=1, fridge_id=1, category_id=1)
+                quantity=1, fridge_id=pk, category_id=1)
     item.save()
-    return HttpResponseRedirect(reverse('index'))
+    return redirect('user')
 
 @login_required(login_url='login')
 def deleterecord(request, id):
@@ -75,7 +75,7 @@ def registerPage(request):
     
 def loginPage(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('user')
     else:
         if request.method == 'POST':
             
@@ -89,7 +89,7 @@ def loginPage(request):
             # Check whether user exist
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                return redirect('user')
             else:
                 messages.info(request, 'Username OR password is incorrect')
     context = {}
@@ -99,7 +99,27 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
-
+# Display user's fridge
 def userProfile(request):
-    return render(request, 'profile.html')
+    fridge = Fridge.objects.prefetch_related('users').filter(users = request.user.id).all()
+    template = loader.get_template('profile.html')
+    context = {
+        "fridges": fridge,
+        "request": request,
+    }
+    return HttpResponse(template.render(context))
 
+
+def createFridge(request):
+    form = FridgeForm()
+    
+    if request.method == 'POST':
+        form = FridgeForm(request.POST)
+        form.users = request.user.id
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        
+    context = {'form': form}
+    return render(request, 'create_fridge.html', context)
+            

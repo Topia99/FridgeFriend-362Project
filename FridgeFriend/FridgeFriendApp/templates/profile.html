@@ -1,6 +1,5 @@
 {% extends "navbar.html" %}
 
-
 {% block title %}
     Profile
 {% endblock %}
@@ -10,5 +9,25 @@
 <img src="/static/ff.png" class="rounded" alt="FridgeFriendLogo.png" width="180" height="180" style="margin-top: 5px;">
     <h1 style="color:green;">{{request.user.username}}'s Fridge</h1>
 
+<div>
+    <a href="/">{{request.user.username}}'s Fridge</a>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Fridge</th>
+        </tr>
+        {% for fridge in fridges %}
+        <tr>
+            <td>{{fridge.fridge_name}}</td>
+            <td><a href="{% url 'fridge' fridge.id %}">View</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'createFridge' %}">Create Fridge</a>
+</div>
+<button>
+    <div>Add New Fridge</div>
+</button>
     
 {% endblock %}

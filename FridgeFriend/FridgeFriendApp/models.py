@@ -1,20 +1,23 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.conf import settings
 
-class User(models.Model):
-    phone = models.CharField(max_length=255)
-    create_at = models.DateTimeField(auto_now_add=True)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 class Fridge(models.Model):
     fridge_name = models.CharField(max_length=255)
     create_at = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
+    users = models.ManyToManyField(User)
+    
+# class User(djangoUser):
+#     phone = models.CharField(max_length=255)
+#     create_at = models.DateTimeField(auto_now_add=True)
+#     fridges = models.ManyToManyField(Fridge)
 
 
-class UserFridge(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE)
+# class UserFridge(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE)
     
 class Category(models.Model):
     DAIRY = 'D'
