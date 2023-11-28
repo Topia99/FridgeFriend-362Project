@@ -38,10 +38,10 @@ def addrecord(request, pk):
     return redirect("fridge", pk)
 
 @login_required(login_url='login')
-def deleterecord(request, id):
+def deleterecord(request, pk, id):
     item_  = Item.objects.get(id=id)
     item_.delete()
-    return HttpResponseRedirect(reverse('index'))
+    return redirect("fridge", pk)
 
 @login_required(login_url='login')
 @csrf_exempt
