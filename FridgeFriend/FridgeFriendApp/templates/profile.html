@@ -10,24 +10,54 @@
     <h1 style="color:green;">{{request.user.username}}'s Fridge</h1>
 
 <div>
-    <a href="/">{{request.user.username}}'s Fridge</a>
-</div>
-<div>
     <table>
         <tr>
             <th>Fridge</th>
         </tr>
         {% for fridge in fridges %}
         <tr>
-            <td>{{fridge.fridge_name}}</td>
-            <td><a href="{% url 'fridge' fridge.id %}">View</a></td>
+            <td style="width:80%"> {{fridge.fridge_name}}</td>
+            <td><a href="{% url 'fridge' fridge.id %}"><img src="/static/eye.png" width="25" height="25"></a></td>
         </tr>
         {% endfor %}
     </table>
-    <a href="{% url 'createFridge' %}">Create Fridge</a>
+    <br>
+    <button> <a href="{% url 'createFridge' %}"><img src="static/add-button.png" width = "24px" height = "24px"></a> </button>
 </div>
-<button>
-    <div>Add New Fridge</div>
-</button>
-    
+
+<h1 style="color:green;" class = "a" >Current Time and Date:</h1>
+<br>
+<p class = "a" id="datetime"></p>
+
+<script>
+  // create a function to update the date and time
+  function updateDateTime() {
+    // create a new `Date` object
+    const now = new Date();
+
+    // get the current date and time as a string
+    const currentDateTime = now.toLocaleString();
+
+    // update the `textContent` property of the `span` element with the `id` of `datetime`
+    document.querySelector('#datetime').textContent = currentDateTime;
+  }
+
+  // call the `updateDateTime` function every second
+  setInterval(updateDateTime, 1000);
+</script>
+
+  <style>
+    h1.a {
+        position: absolute;
+        top: 230px;
+        right: 0;
+      } 
+
+    p.a {
+        position: absolute;
+        top: 275px;
+        right: 0px;
+    }
+
+  </style>  
 {% endblock %}

@@ -42,10 +42,6 @@
           <li class="nav-item">
             <a class="nav-link link-light" href="/">HOME</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link link-light" href="/profile">Profile</a>
-          </li>
-         
 
            <!-- Right-aligned user info -->
            <li class="nav-item">
@@ -55,7 +51,9 @@
             <a class="hello-msg link-light" href="{% url 'logout' %}">Logout</a>
           </li> 
         </ul>
-      
+
+
+
         {% block content %}
         {% endblock %}
       </div>
