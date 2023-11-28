@@ -76,7 +76,7 @@
     </ul>
     <div>
 
-        <form action="addrecord" method="post">
+        <form action="/addrecord/{{fridge_id}}" method="post">
           {% csrf_token %}
           Item:
           <input name="item">

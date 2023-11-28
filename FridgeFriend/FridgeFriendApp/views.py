@@ -19,6 +19,7 @@ def index(request, pk):
     item_list = Item.objects.filter(fridge=pk).all()
     context = {
         "items": item_list,
+        'fridge_id': pk,
         "request": request,
     }
     return HttpResponse(template.render(context))
@@ -34,7 +35,7 @@ def addrecord(request, pk):
     item = Item(item_name=name, expiry_date=exp_date,
                 quantity=1, fridge_id=pk, category_id=1)
     item.save()
-    return redirect('user')
+    return redirect("fridge", pk)
 
 @login_required(login_url='login')
 def deleterecord(request, id):
