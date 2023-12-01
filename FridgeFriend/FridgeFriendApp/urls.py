@@ -22,6 +22,6 @@ urlpatterns = [
     path("addrecord/<uuid:pk>", views.addrecord, name="addrecord"),
     path("fridge/<uuid:pk>/deleterecord/<int:id>", views.deleterecord, name="deleterecord"),
     path("updaterecord/<uuid:id>", views.updaterecord, name="updaterecord"),
-    path("create_fridge/", views.createFridge, name="createFridge"),
+    path("createFridge/", views.createFridge, name="createFridge"),
     path("", views.userProfile, name='user'),
 ]

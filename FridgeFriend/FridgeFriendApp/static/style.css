@@ -11,3 +11,8 @@ body {
     border-color: transparent;
     --bs-table-hover-color: #198754;
 }
+
+.add-fridge {
+    color: inherit; /* This makes the text color inherit from the parent element */
+    text-decoration: none; /* This removes the underline */
+}

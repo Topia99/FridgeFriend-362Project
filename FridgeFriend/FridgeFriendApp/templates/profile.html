@@ -6,58 +6,106 @@
 
 {% block content %}
 
-<img src="/static/ff.png" class="rounded" alt="FridgeFriendLogo.png" width="180" height="180" style="margin-top: 5px;">
-    <h1 style="color:green;">{{request.user.username}}'s Fridge</h1>
 
-<div>
-    <table>
-        <tr>
-            <th>Fridge</th>
-        </tr>
+<style>
+  .background {
+    background-color: #a4c499;
+}
+
+.card-title {
+    font-size: 1.5rem; /* Increase the font size of the fridge name */
+}
+
+.btn-smaller {
+    padding: 0.25rem 0.5rem; /* Smaller padding for a smaller button */
+    font-size: 0.875rem; /* Smaller font size for the button text */
+    line-height: 1.5; /* Adjust line height for aesthetics */
+}
+
+</style>
+
+<!-- Fridge Display Section -->
+<div class="container mt-4">
+  <h1 style="color:green;">{{ request.user.username }}'s Fridge</h1>
+
+    <!-- Fridge Cards -->
+    <div class="row">
         {% for fridge in fridges %}
-        <tr>
-            <td style="width:80%"> {{fridge.fridge_name}}</td>
-            <td><a href="{% url 'fridge' fridge.id %}"><img src="/static/eye.png" width="25" height="25"></a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <button> <a href="{% url 'createFridge' %}"><img src="static/add-button.png" width = "24px" height = "24px"></a> </button>
-</div>
+        <div class="col-md-4 mb-3">
+          <div class="card fridge-card">
+              <div class="card-body">
+                  <h5 class="card-title">{{ fridge.fridge_name }}</h5>
+                  <a href="{% url 'fridge' fridge.id %}" class="btn btn-primary">View Fridge</a>
+              </div>
+          </div>
+        </div>
 
-<h1 style="color:green;" class = "a" >Current Time and Date:</h1>
-<br>
-<p class = "a" id="datetime"></p>
+        {% comment %} <!-- Fridge Modal -->
+        <div class="modal fade" id="fridgeModal{{ fridge.id }}" tabindex="-1" role="dialog" aria-labelledby="fridgeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fridgeModalLabel">{{ fridge.fridge_name }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <a href="{% url 'fridge' fridge.id %}" class="btn btn-primary">Go to Fridge</a>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Fridge details here -->
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{% url 'fridge' fridge.id %}" class="btn btn-primary">Go to Fridge</a>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+        {% endfor %}
+    </div>
+
+    <!-- Add Fridge Button -->
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addFridgeModal">
+      <a class="add-fridge" href="{% url 'createFridge' %}">Add Fridge</a>
+    </button>
+
+    {% comment %} <!-- Add Fridge Modal -->
+    <div class="modal fade" id="addFridgeModal" tabindex="-1" role="dialog" aria-labelledby="addFridgeModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="addFridgeModalLabel">Add New Fridge</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <a href="{% url 'createFridge' %}">Add Fridge</a>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <!-- Form for adding fridge -->
+                  <form method="POST" action="{% url 'createFridge' %}">
+                    {% csrf_token %}
+                    <label for="fridgename">Friage Name:</label>
+                    <input type="text" name="fridgename"><br><br>
+                    <button type="submit" class="btn btn-primary">Add Fridge</button>
+                  </form>
+              </div> 
+          </div>
+      </div>
+    </div> {% endcomment %}
+
+
+<!-- Bootstrap JS and its dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-  // create a function to update the date and time
-  function updateDateTime() {
-    // create a new `Date` object
-    const now = new Date();
+  window.onload = function() {
+      var colors = ["#4FDDEE", "#DAF7A6", "#FFC300", "#329E63", "#EEA4DD"]; // Add more colors as needed
+      var fridgeCards = document.querySelectorAll('.fridge-card');
 
-    // get the current date and time as a string
-    const currentDateTime = now.toLocaleString();
-
-    // update the `textContent` property of the `span` element with the `id` of `datetime`
-    document.querySelector('#datetime').textContent = currentDateTime;
-  }
-
-  // call the `updateDateTime` function every second
-  setInterval(updateDateTime, 1000);
+      fridgeCards.forEach(function(card, index) {
+          card.style.backgroundColor = colors[index % colors.length];
+      });
+  };
 </script>
 
-  <style>
-    h1.a {
-        position: absolute;
-        top: 230px;
-        right: 0;
-      } 
-
-    p.a {
-        position: absolute;
-        top: 275px;
-        right: 0px;
-    }
-
-  </style>  
+<!-- Rest of your existing code -->
 {% endblock %}

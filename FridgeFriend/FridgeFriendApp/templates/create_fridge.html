@@ -6,11 +6,44 @@
 
 {% block content %}
 
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form}}
+<style>
+    .create-fridge-form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f3f3f3;
+        border-radius: 8px;
+    }
 
-    <input type="submit" name="submit">
+    .create-fridge-form input,
+    .create-fridge-form select,
+    .create-fridge-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .create-fridge-form input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .create-fridge-form input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<form action="" method="POST" class="create-fridge-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" name="submit" value="Create Fridge">
 </form>
     
 {% endblock %}

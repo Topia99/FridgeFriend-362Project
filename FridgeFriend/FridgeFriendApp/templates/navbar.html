@@ -4,6 +4,8 @@
 <html>
   <link rel="stylesheet" href="{% static 'style.css' %}">
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="{% static 'functions.js' %}"></script>
   <style>
     table, th, td {
@@ -26,6 +28,13 @@
     .nav-item {
         align-self: center;
     }
+
+    .add-fridge {
+        color: inherit; /* This makes the text color inherit from the parent element */
+        text-decoration: none; /* This removes the underline */
+    }
+    
+
   </style>
 <head>
     <title>Fridge Friend - {%block title %}{% endblock %}</title>

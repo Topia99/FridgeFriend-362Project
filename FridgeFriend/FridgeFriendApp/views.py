@@ -109,6 +109,8 @@ def userProfile(request):
     return HttpResponse(template.render(context))
 
 
+
+
 def createFridge(request):
     form = FridgeForm()
 
