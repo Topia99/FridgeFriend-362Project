@@ -13,5 +13,8 @@ class CreateUserForm(UserCreationForm):
 class FridgeForm(ModelForm):
     class Meta:
         model = Fridge
-        fields = ['fridge_name', 'users']
+        fields = ['fridge_name']
+        exclude = ['users']
         
+    # fridge_name = forms.CharField(max_length=255)
+    # users = forms.IntegerField(required=False)

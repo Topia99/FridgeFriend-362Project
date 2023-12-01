@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Item, Fridge, Category
+from .models import Item, Fridge
 from .forms import CreateUserForm, FridgeForm
 
 
@@ -29,11 +29,9 @@ def index(request, pk):
 def addrecord(request, pk):
     name = request.POST['item']
     exp_date = request.POST['expdate']
-    current_fridge = Fridge.objects.first()
-    category_choice = Category.objects
 
     item = Item(item_name=name, expiry_date=exp_date,
-                quantity=1, fridge_id=pk, category_id=1)
+                quantity=1, fridge_id=pk)
     item.save()
     return redirect("fridge", pk)
 
@@ -113,12 +111,13 @@ def userProfile(request):
 
 def createFridge(request):
     form = FridgeForm()
-    
+
     if request.method == 'POST':
         form = FridgeForm(request.POST)
-        form.users = request.user.id
         if form.is_valid():
-            form.save()
+            fridge_instance = form.save(commit=False)  # Save the form temporarily without committing to the database
+            fridge_instance.save()  # Now save the instance to the database
+            fridge_instance.users.set([request.user])  # Set the many-to-many relationship
             return redirect('/')
         
     context = {'form': form}

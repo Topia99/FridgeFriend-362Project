@@ -46,7 +46,7 @@
            <!-- Right-aligned user info -->
            <li class="nav-item">
             <span class="hello-msg">Hello,
-              <a class="hello-msg link-light" href="{% url 'logout' %}">{{ request.user.username }}</a>
+              <a class="hello-msg link-light">{{ request.user.username }}</a>
             </span>
             <a class="hello-msg link-light" href="{% url 'logout' %}">Logout</a>
           </li> 
