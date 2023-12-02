@@ -54,6 +54,7 @@ class Item(models.Model):
     expiry_date = models.DateField(null=True)
     fridge = models.ForeignKey(Fridge, on_delete=models.PROTECT)
     create_at = models.DateTimeField(auto_now_add=True)
+    notified = models.BooleanField(default=False)
     # category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
 # class ItemStatus(models.Model):
