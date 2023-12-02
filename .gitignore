@@ -3,3 +3,8 @@ FridgeFriend/FridgeFriend/settings.py
 FridgeFriend/FridgeFriendApp/__pycache__/
 FridgeFriend/FridgeFriend/__pycache__/
 secret_keys.py
+FridgeFriend/Pipfile
+FridgeFriend/Pipfile.lock
+FridgeFriend/Pipfile.lock
+FridgeFriend/Pipfile
+.gitignore
