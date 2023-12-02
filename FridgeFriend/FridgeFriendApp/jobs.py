@@ -18,18 +18,21 @@ def send_warning_email(item):
         
 def check_date():
     try:
-        for item in Item.objects.all():
-            print(item.item_name)
+        for item in Item.objects.filter(notified=False):
             currentDate = datetime.datetime.now()
             expiryDate = datetime.datetime.combine(item.expiry_date, datetime.datetime.min.time())
             timeLeft = currentDate - expiryDate
             timeCutOff = datetime.timedelta(hours=24)
             if timeLeft < timeCutOff:
                 send_warning_email(item)
+                print(item.item_name)
+                item.notified = True
+                item.save()
+                
     except Exception as e:
         print(e)
         time.sleep(100)
-    time.sleep(1000)
+    time.sleep(60)
 
 
 def start_scheduler():
