@@ -23,6 +23,7 @@ def index(request, pk):
         "request": request,
     }
     return HttpResponse(template.render(context))
+    #TO-DO: look at register page and adjust render to avoid csrf error
 
 #@login_required(login_url='login')
 @csrf_exempt #let's revist this after the login page is made
@@ -43,15 +44,15 @@ def deleterecord(request, pk, id):
 
 @login_required(login_url='login')
 @csrf_exempt
-def updaterecord(request, id):
+def updaterecord(request, pk, id):
     item_ = Item.objects.get(id=id)
-    name = request.POST['item']
-    exp_date = request.POST['expdate']
+    name = request.POST['item_update']
+    exp_date = request.POST['expdate_update']
 
     item_.item_name = name
     item_.expiry_date = exp_date
     item_.save()
-    return HttpResponseRedirect(reverse('index'))
+    return redirect("fridge", pk)
 
 
 def registerPage(request):

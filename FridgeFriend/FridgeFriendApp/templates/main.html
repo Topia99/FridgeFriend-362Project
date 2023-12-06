@@ -67,7 +67,7 @@
                     </script>
 
 
-                <td> <a href="/fridge/{{fridge_id}}/deleterecord/{{Item.id}}"><img src="/static/delete.png" width="25" height="25"></a>   |   <img src="/static/edit.png" onclick="openModal('{{Item.item_name}}')" width="25" height="25"> </td>
+                <td> <a href="/fridge/{{fridge_id}}/deleterecord/{{Item.id}}"><img src="/static/delete.png" width="25" height="25"></a>   |   <img src="/static/edit.png" onclick="openModal('{{Item.item_name}}',{{Item.id}})" width="25" height="25"> </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -92,19 +92,18 @@
         </div>
         
         <div id="myModal" class="modal">
-
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close">&times;</span>
-            <form name="update" action="/updaterecord/{{fridge_id}}" method="post">
-              {%csrf_token%}
+            <form name="update" action="/fridge/{{fridge_id}}/updaterecord/{{Item.id}}" method="post">
+              {% csrf_token %}
               Item:
               <input name="item_update">
               Expiration Date:
               <input type="date" name="expdate_update">
               <br><br>
               <div class="main-buttons">
-                <input class="btn btn-dark" type="submit" vale="Update">
+                <input class="btn btn-dark" type="submit" value="Update">
               </div>
             </form>
           </div>
@@ -112,9 +111,14 @@
           <script>
             var modal = document.getElementById("myModal");
             // When the user clicks on the button, open the modal
-              function openModal(item_name) {
+              function openModal(item_name, item_id) {
                 modal.style.display = "block";
-                document.querySelector('form[name=update] input[name=item_update]').value = item_name;
+                formName = document.querySelector('form[name=update] input[name=item_update]')
+                formObj = document.querySelector('form[name=update]')
+                formName.value = item_name;
+                formName.readOnly = true; 
+                formName.style.background = "lightgrey";
+                formObj.action = "/fridge/{{fridge_id}}/updaterecord/" + item_id
               }
   
               // When the user clicks on <span> (x), close the modal

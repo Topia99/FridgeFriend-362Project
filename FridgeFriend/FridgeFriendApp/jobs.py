@@ -1,9 +1,10 @@
-from schedule import Scheduler
+import schedule
 import time
 import datetime
 from .models import Item, Fridge
 import requests
 from . import secret_keys
+import threading
 
 def send_warning_email(item):
     user_email = Fridge.objects.filter(id=item.fridge_id)[0].users.first().email
@@ -32,14 +33,23 @@ def check_date():
     except Exception as e:
         print(e)
         time.sleep(100)
-    time.sleep(60)
+    #time.sleep(60)
 
+def run_continuously(interval=30):
+    cease_continuous_run = threading.Event()
+
+    class ScheduleThread(threading.Thread):
+        @classmethod
+        def run(cls):
+            while not cease_continuous_run.is_set():
+                schedule.run_pending()
+                time.sleep(interval)
+
+    continuous_thread = ScheduleThread()
+    continuous_thread.daemon = True
+    continuous_thread.start()
+    return cease_continuous_run
 
 def start_scheduler():
-    scheduler = Scheduler()
-    scheduler.every(5).seconds.do(check_date)
-
-    active = True
-    while active:
-        scheduler.run_pending()
-        time.sleep(1)
+    schedule.every(10).seconds.do(check_date)
+    stop_run_continously = run_continuously()
