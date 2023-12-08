@@ -67,7 +67,7 @@
                     </script>
 
 
-                <td> <a href="/fridge/{{fridge_id}}/deleterecord/{{Item.id}}"><img src="/static/delete.png" width="25" height="25"></a>   |   <img src="/static/edit.png" onclick="openModal('{{Item.item_name}}',{{Item.id}})" width="25" height="25"> </td>
+                <td> <a href="/fridge/{{fridge_id}}/deleterecord/{{Item.id}}"><img src="/static/delete.png" width="25" height="25"></a>   |   <a href="/fridge/{{fridge_id}}/updaterecord/{{Item.id}}"><img src="/static/edit.png" onclick="openModal('{{Item.item_name}}')" width="25" height="25"></a></td>
                 </tr>
               {% endfor %}
             </tbody>

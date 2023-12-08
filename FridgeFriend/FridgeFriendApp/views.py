@@ -100,6 +100,7 @@ def logoutUser(request):
     return redirect('login')
 
 # Display user's fridge
+@login_required(login_url='login')
 def userProfile(request):
     fridge = Fridge.objects.prefetch_related('users').filter(users = request.user.id).all()
     template = loader.get_template('profile.html')
@@ -111,7 +112,7 @@ def userProfile(request):
 
 
 
-
+@login_required(login_url='login')
 def createFridge(request):
     form = FridgeForm()
 
